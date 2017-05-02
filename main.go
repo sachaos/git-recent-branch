@@ -4,10 +4,12 @@ import (
 	"os"
 
 	"encoding/csv"
+	"fmt"
 	"github.com/sachaos/git-recent-branch/gitlogs"
 	"github.com/sachaos/git-recent-branch/utils"
 	"github.com/urfave/cli"
 	"io/ioutil"
+	"os/exec"
 	"sort"
 	"strings"
 	"time"
@@ -18,7 +20,13 @@ var writer utils.Writer
 func gitRecentBranch(c *cli.Context) {
 	defer writer.Flush()
 
-	logsBuf, err := ioutil.ReadFile(".git/logs/HEAD")
+	out, err := exec.Command("git-rev-parse", "--show-cdup").Output()
+	if err != nil {
+		fmt.Printf("%s", err)
+		return
+	}
+
+	logsBuf, err := ioutil.ReadFile(strings.TrimSpace(string(out)) + ".git/logs/HEAD")
 	if err != nil {
 		panic("failed to open logs")
 	}
