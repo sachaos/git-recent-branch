@@ -26,7 +26,9 @@ func gitRecentBranch(c *cli.Context) {
 		return
 	}
 
-	logsBuf, err := ioutil.ReadFile(strings.TrimSpace(string(out)) + ".git/logs/HEAD")
+	gitRoot := strings.TrimSpace(string(out))
+
+	logsBuf, err := ioutil.ReadFile(gitRoot + ".git/logs/HEAD")
 	if err != nil {
 		panic("failed to open logs")
 	}
