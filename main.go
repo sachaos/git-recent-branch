@@ -5,6 +5,7 @@ import (
 
 	"encoding/csv"
 	"fmt"
+	humanize "github.com/dustin/go-humanize"
 	"github.com/sachaos/git-recent-branch/gitlogs"
 	"github.com/sachaos/git-recent-branch/utils"
 	"github.com/urfave/cli"
@@ -47,7 +48,7 @@ func gitRecentBranch(c *cli.Context) {
 	for _, log := range logs {
 		writer.Write([]string{
 			log.Message.(gitlogs.CheckoutLog).BeforeCommit,
-			"(" + time.Since(log.CreatedAt).String() + ")",
+			"(" + humanize.Time(log.CreatedAt) + ")",
 			log.CreatedAt.Format(time.UnixDate),
 		})
 	}
