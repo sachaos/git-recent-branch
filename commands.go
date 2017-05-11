@@ -12,6 +12,10 @@ var GlobalFlags = []cli.Flag{
 		Name:  "csv",
 		Usage: "output in CSV format",
 	},
+	cli.BoolFlag{
+		Name:  "no-unique",
+		Usage: "show not unique logs",
+	},
 	cli.IntFlag{
 		Name:  "n",
 		Value: 10,
