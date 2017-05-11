@@ -1,5 +1,5 @@
 function peco-recent-branch () {
-    local branch=$(git recent-branch | peco | cut -d ' ' -f 1 )
+    local branch=$(git recent-branch -n 50 | peco | cut -d ' ' -f 1 )
     if [ -n "$branch" ]; then
         if [ -n "$LBUFFER" ]; then
             local new_left="${LBUFFER%\ } $branch"
