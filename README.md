@@ -5,7 +5,7 @@
 git subcommand.
 List recent visited branches with visit time.
 
-[![asciicast](https://asciinema.org/a/6udgomg725ue5ixwh0ahegw57.png)](https://asciinema.org/a/6udgomg725ue5ixwh0ahegw57)
+[![asciicast](https://asciinema.org/a/2ivqfsaz672d36l596tdop51l.png)](https://asciinema.org/a/2ivqfsaz672d36l596tdop51l)
 
 ## Usage
 
