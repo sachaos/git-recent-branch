@@ -45,7 +45,10 @@ func gitRecentBranch(c *cli.Context) {
 
 	sort.Sort(logs)
 
-	for _, log := range logs {
+	num := c.Int("n")
+	lnum := len(logs)
+	for i := 0; i < num && i < lnum; i++ {
+		log := logs[i]
 		writer.Write([]string{
 			log.Message.(gitlogs.CheckoutLog).BeforeCommit,
 			"(" + humanize.Time(log.CreatedAt) + ")",

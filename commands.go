@@ -12,6 +12,11 @@ var GlobalFlags = []cli.Flag{
 		Name:  "csv",
 		Usage: "output in CSV format",
 	},
+	cli.IntFlag{
+		Name:  "n",
+		Value: 10,
+		Usage: "num of entry",
+	},
 }
 
 var Commands = []cli.Command{}
