@@ -39,7 +39,12 @@ func NewCheckoutLog(message string) CheckoutLog {
 }
 
 func NewLog(logString string) Log {
-	parsedLog := logRegex.FindAllStringSubmatch(logString, -1)[0]
+	parsedLogString := logRegex.FindAllStringSubmatch(logString, -1)
+	if parsedLogString == nil {
+		return Log{}
+	}
+
+	parsedLog := parsedLogString[0]
 	unix, err := strconv.ParseInt(parsedLog[5], 10, 64)
 
 	if err != nil {
