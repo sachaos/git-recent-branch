@@ -5,18 +5,21 @@ import (
 
 	"encoding/csv"
 	"fmt"
-	humanize "github.com/dustin/go-humanize"
-	"github.com/sachaos/git-recent-branch/gitlogs"
-	"github.com/sachaos/git-recent-branch/utils"
-	"github.com/urfave/cli"
 	"io/ioutil"
 	"os/exec"
 	"sort"
 	"strings"
 	"time"
+
+	humanize "github.com/dustin/go-humanize"
+	"github.com/sachaos/git-recent-branch/gitlogs"
+	"github.com/sachaos/git-recent-branch/utils"
+	"github.com/urfave/cli"
 )
 
 var writer utils.Writer
+
+const logPath = "/logs/HEAD"
 
 func contains(s []string, x string) bool {
 	for _, a := range s {
@@ -28,10 +31,10 @@ func contains(s []string, x string) bool {
 }
 
 func gitRoot() string {
-	buf, err := exec.Command("git-rev-parse", "--show-cdup").Output()
+	buf, err := exec.Command("git-rev-parse", "--git-dir").Output()
 	if err != nil {
-		fmt.Printf("%s", err)
-		panic(err)
+		_ = fmt.Errorf("%s", err)
+		os.Exit(1)
 	}
 
 	return strings.TrimSpace(string(buf))
@@ -40,7 +43,7 @@ func gitRoot() string {
 func gitRecentBranch(c *cli.Context) {
 	defer writer.Flush()
 
-	logsBuf, err := ioutil.ReadFile(gitRoot() + ".git/logs/HEAD")
+	logsBuf, err := ioutil.ReadFile(gitRoot() + logPath)
 	if err != nil {
 		panic("failed to open logs")
 	}
