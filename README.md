@@ -18,7 +18,7 @@ USAGE:
    git-recent-branch [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.0
+   0.2.0
 
 AUTHOR:
    sachaos
